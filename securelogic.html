@@ -208,7 +208,7 @@
 
         .benefit-text {
             flex: 1;
-            font-size: 24px;
+            
         }
 
         .benefit-text h2 {
@@ -236,11 +236,24 @@
 /*            border-radius: 8px;*/
         }
 
-        .benefit-item:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s ease;
+      .benefit-btn {
+            background: #42E8E0;
+            color: #080042;
+            padding: 15px 30px;
+/*            border-radius: 5px;*/
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
         
+        .benefit-btn:hover {
+            background: #5fffd7;
+            transform: scale(1.1);
+        }
+        
+
+
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -401,7 +414,7 @@
         <div class="benefit-text">
             <h2>One-size-fits-all hosting doesn’t work for everyone. </h2>
             <p>That’s why we provide bespoke solutions that fit your exact needs, backed by high-performance infrastructure and expert support. Focus on your business—we’ll handle the rest.</p>
-            <a href="#" class="hero-btn benefit-item">Learn More</a>
+            <a href="#" class="benefit-btn">Learn More</a>
         </div>
     </section>
 
