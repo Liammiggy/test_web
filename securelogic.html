@@ -1,428 +1,1018 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Logic</title>
-    <style>
-        body {
-            background-color: #42E8E0;
-            margin: 0;
-            font-family: Montserrat, sans-serif;
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-           background: #02678C;
-            padding: 15px 40px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-/*            margin-left:500px;*/
-        }
-        
-        .nav-item {
-            position: relative;
-            color: white;
-            font-size: 15px;
-            text-decoration: none;
-            padding: 12px 18px;
-            font-weight: normal;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-        
-        .nav-item::before, .nav-item::after, .nav-item span::before, .nav-item span::after {
-            content: "";
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border: 2px solid #5fffd7;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .nav-item::before {
-            top: 0;
-            left: 0;
-            border-right: none;
-            border-bottom: none;
-        }
-        
-        .nav-item::after {
-            top: 0;
-            right: 0;
-            border-left: none;
-            border-bottom: none;
-        }
-        
-        .nav-item span::before {
-            bottom: 0;
-            left: 0;
-            border-right: none;
-            border-top: none;
-        }
-        
-        .nav-item span::after {
-            bottom: 0;
-            right: 0;
-            border-left: none;
-            border-top: none;
-        }
-        
-        .nav-item:hover {
-            color: #5fffd7;
-            transform: scale(1.1);
-        }
-        
-        .nav-item:hover::before, .nav-item:hover::after, .nav-item:hover span::before, .nav-item:hover span::after {
-            opacity: 1;
-        }
-        
-        .talk-to-us {
-            background: #42E8E0;
-            color: #080042;
-            padding: 12px 20px;
-/*            border-radius: 5px;*/
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-        
-        .talk-to-us:hover {
-            background: #5fffd7;
-            transform: scale(1.1);
-        }
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
 
-
+      <title>Secure Logic</title>
+      <style>
+         body {
+/*         background-color: #42E8E0;*/
+         margin: 0;
+         font-family: Montserrat, sans-serif;
+          overflow-x: hidden;
+         }
+         .navbar {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         position: sticky;
+         top: 0;
+         background: #02678C;
+         padding: 15px 40px;
+         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+         z-index: 1000;
+         }
+         .nav-links {
+         display: flex;
+         gap: 30px;
+         /*            margin-left:500px;*/
+         }
+         .nav-item {
+         position: relative;
+         color: white;
+         font-size: 15px;
+         text-decoration: none;
+         padding: 12px 18px;
+         font-weight: normal;
+         transition: color 0.3s ease, transform 0.3s ease;
+         }
+         .nav-item::before, .nav-item::after, .nav-item span::before, .nav-item span::after {
+         content: "";
+         position: absolute;
+         width: 10px;
+         height: 10px;
+         border: 2px solid #5fffd7;
+         opacity: 0;
+         transition: opacity 0.3s ease;
+         }
+         .nav-item::before {
+         top: 0;
+         left: 0;
+         border-right: none;
+         border-bottom: none;
+         }
+         .nav-item::after {
+         top: 0;
+         right: 0;
+         border-left: none;
+         border-bottom: none;
+         }
+         .nav-item span::before {
+         bottom: 0;
+         left: 0;
+         border-right: none;
+         border-top: none;
+         }
+         .nav-item span::after {
+         bottom: 0;
+         right: 0;
+         border-left: none;
+         border-top: none;
+         }
+         .nav-item:hover {
+         color: #5fffd7;
+         transform: scale(1.1);
+         }
+         .nav-item:hover::before, .nav-item:hover::after, .nav-item:hover span::before, .nav-item:hover span::after {
+         opacity: 1;
+         }
+         .talk-to-us {
+         background: #42E8E0;
+         color: #080042;
+         padding: 12px 20px;
+         /*            border-radius: 5px;*/
+         text-decoration: none;
+         font-weight: bold;
+         transition: background 0.3s ease, transform 0.3s ease;
+         }
+        /* .talk-to-us:hover {
+         background: #5fffd7;
+         transform: scale(1.1);
+         }*/
+         .logo {
+         font-size: 24px;
+         font-weight: bold;
+         color: #5fffd7;
+         }
+         .menu-toggle {
+         display: none;
+         font-size: 24px;
+         color: white;
+         cursor: pointer;
+         }
+         @keyframes fadeSlideUp {
+         from {
+         opacity: 0;
+         transform: translateY(50px);
+         }
+         to {
+         opacity: 1;
+         transform: translateY(0);
+         }
+         }
+         .hero {
+         height: 70vh;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         padding: 0 10%;            
+         background: rgb(2,103,140);
+         background: linear-gradient(180deg, rgba(2,103,140,1) 0%, rgba(8,0,66,1) 100%);
+         color: white;
+         flex-wrap: nowrap;
+         }
+         .hero-text {
+         max-width: 100%;
+         margin-bottom: 20px;
+         animation: fadeSlideUp 0.5s ease-out forwards;
+         }
+         .hero-text h1 {
+         font-size: 90px;
+         margin-bottom: 20px;
+         font-weight: 500;
+         }
+         .hero-text p {
+         font-size: 30px;
+         }
         
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #5fffd7;
-        }
 
-           .menu-toggle {
-            display: none;
-            font-size: 24px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .hero {
-            height: 70vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 10%;            
-           background: rgb(2,103,140);
-            background: linear-gradient(180deg, rgba(2,103,140,1) 0%, rgba(8,0,66,1) 100%);
-            color: white;
-            flex-wrap: nowrap;
-
-          
-        }
-        
-
-        .hero-text {
-            max-width: 100%;
-              margin-bottom: 20px;
-        }
-        
-        .hero-text h1 {
-            font-size: 90px;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        
-        .hero-text p {
-            font-size: 30px;
-          
-        }
-        
-        .hero-btn {
-            background: #42E8E0;
-            color: #080042;
-            padding: 15px 30px;
-/*            border-radius: 5px;*/
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-        
-        .hero-btn:hover {
-            background: #5fffd7;
-            transform: scale(1.1);
-        }
-        
-        .hero-img img {
-            max-width: 100%;
-            height: auto;
-            margin-top:600px;
-
-        }
-
-
+         .hero-btn {
+         background: #42E8E0;
+         color: #080042;
+         padding: 15px 30px;
+       
+         text-decoration: none;
+         font-weight: bold;
+         display: inline-block;
+         transition: background 0.3s ease, transform 0.3s ease;
+         }
+         .hero-btn:hover {
+         background: #5fffd7;
+         transform: scale(1.1);
+         }
+         .hero-img img {
+         max-width: 120%;
+         height: auto;
+         margin-top:450px;
+         max-width: 120%;
+         animation: fadeSlideUp 0.5s ease-out forwards;
+         }
+         /*       .hero {
+         animation: fadeSlideUp .5s ease-out forwards;
+         }
+         */
          /* Container for the vertical lines */
-        .vertical-lines-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height:2000px;
+         .vertical-lines-container {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height:5010px;
+         pointer-events: none; /* So it doesn't block clicks */
+         z-index: 0; /* Put lines behind content */
+         display: flex;
+         justify-content: space-between;
+         align-items: stretch;
+         }
+         .vertical-line {
+         width:1px; /* Width of the line */
+         background-color: #B3F6F3; /* Line color */
+         height: auto; /* Full height from top to bottom */
+         opacity: .05;
+         }
+         /* Benefit Section */
+        /*.benefit-section {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         padding: 90px 10%;
+         background: rgb(2,103,140);background: radial-gradient(circle at bottom right,rgba(2,103,140,1) 0%, rgba(8,0,66,1) 52%);
+         color: white;
+         }*/
+
+         .benefit-section {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 90px 10%;
+          background: radial-gradient(circle at bottom right, rgba(2,103,140,1) 0%, rgba(8,0,66,1) 52%);
+          color: white;
           
-            pointer-events: none; /* So it doesn't block clicks */
-            z-index: 0; /* Put lines behind content */
-            display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-        }
-
-        .vertical-line {
-            width:1px; /* Width of the line */
-            background-color: #B3F6F3; /* Line color */
-            height: auto; /* Full height from top to bottom */
-            opacity: .1;
-
-        }
+      }
 
 
-
-
- /* Benefit Section */
-        .benefit-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 90px 10%;
-            background: rgb(2,103,140);background: radial-gradient(circle at bottom right,rgba(2,103,140,1) 0%, rgba(8,0,66,1) 52%);
-            color: white;
-        }
-
-        .benefit-text {
-            flex: 1; 
-
-            
-        }
-
-        .benefit-text h2 {
-            font-size: 36px;
-            font-weight: 500;
-            margin-bottom: 20px;
-            color: #42E8E0;
-        }
-
-        .benefit-text p {
-            font-size: 16px;
-            margin-bottom: 20px;
-            line-height:30px;
-        }
-
-        .benefit-img {
-            flex: 1.2;
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        .benefit-img img {
-            max-width: 100%;
-            height: auto;
-/*            border-radius: 8px;*/
-        }
-
-      .benefit-btn {
-            background: #42E8E0;
-            color: #080042;
-            padding: 15px 30px;
-/*            border-radius: 5px;*/
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-        
-        .benefit-btn:hover {
-            background: #5fffd7;
-            transform: scale(1.1);
-        }
-        
-
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                gap: 10px;
-                background: #001a33;
-                width: 100%;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                padding: 10px 0;
-            }
-            .nav-links.active {
-                display: flex;
-            }
+         .benefit-text {
+         flex: 1; 
+          opacity: 0; /* Start invisible */
+          
+         }
+         .benefit-text h2 {
+         font-size: 36px;
+         font-weight: 500;
+         margin-bottom: 20px;
+         color: #42E8E0;
+         }
+         .benefit-text p {
+         font-size: 16px;
+         margin-bottom: 20px;
+         line-height:30px;
+         }
+         .benefit-img {
+         flex: 1.2;
+         display: flex;
+         justify-content: flex-start;
+          opacity: 0; /* Start invisible */
          
+         }
+         .benefit-img img {
+         max-width: 100%;
+         height: auto;
         
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-            }
-            .hero-text {
-                max-width: 100%;
-                font-weight: 20px;
-            }
-            .hero-img {
-                margin-top: 20px;
-            }
-              .talk-to-us {
-           display: none;
-        }
-
-             .benefit-section {
-                flex-direction: column;
-                padding: 30px 5%;
-                text-align: center;
-            }
-
-            .benefit-img {
-                margin-top: 20px;
-                justify-content: center;
-            }
-
-            .benefit-text h2 {
-                font-size: 30px;
-            }
-
-            .benefit-text p {
-                font-size: 16px;
-            }
-
-        @media (max-width: 576px) { 
-    .menu-toggle {
-        display: block;
-    }
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        gap: 10px;
-        background: #001a33;
-        width: 100%;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        padding: 10px 0;
-    }
-    .nav-links.active {
-        display: flex;
-    }
-    .hero {
-        flex-direction: column;
-        text-align: center;
-     padding: 20px;
+         }
+         .benefit-btn {
+         background: #42E8E0;
+         color: #080042;
+         padding: 15px 30px;
+       
+         text-decoration: none;
+         font-weight: bold;
+         display: inline-block;
+         transition: background 0.3s ease, transform 0.3s ease;
+         }
+         .benefit-btn:hover {
+         background: #5fffd7;
+         transform: scale(1.1);
+         }
 
 
-    }
-    .hero h1
-
-    {
-        font-size: 50px;
-
-    }
-    .hero-text {
-        max-width: 100%;
-        font-size: 18px;
-  
-    }
-    .hero-img {
-     margin-top: -550px;
-    }
-    .talk-to-us {
-        display: none;
-    }
 
 
-        }
-    </style>
-    <script>
-        function toggleMenu() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        }
-    </script>
-</head>
-<body>
-    <!-- Vertical Lines Container -->
-    <div class="vertical-lines-container">
-        <div class="vertical-line"></div>
-        <div class="vertical-line"></div>
-        <div class="vertical-line"></div>
-        <div class="vertical-line"></div>
-        <div class="vertical-line"></div>
-        <div class="vertical-line"></div>
-        <div class="vertical-line"></div>
-    </div>
+        
+.why-us {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 90px 10%;
+   background: rgb(24,13,91);
+   background: linear-gradient(90deg, rgba(24,13,91,1) 0%, rgba(66,232,224,1) 120%);
+   color: white;
+}
+
+.why-us-text {
+   flex: 1;
+/*   opacity: 0; */
+}
+
+.why-us-text h2 {
+   font-size: 36px;
+   font-weight: 500;
+   margin-bottom: 20px;
+   color: #42E8E0;
+}
+
+.why-us-text p {
+   font-size: 16px;
+   margin-bottom: 20px;
+   line-height: 30px;
+}
+
+.why-us-img {
+   flex: 1.2;
+   display: flex;
+   justify-content: flex-end; /* Align image to the right */
+/*   opacity: 0; */
+}
+
+.why-us-img img {
+   max-width: 100%;
+   height: auto;
+}
+
+.why-us-btn {
+   background: #42E8E0;
+   color: #080042;
+   padding: 15px 30px;
+   text-decoration: none;
+   font-weight: bold;
+   display: inline-block;
+   transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.why-us-btn:hover {
+   background: #5fffd7;
+   transform: scale(1.1);
+}
+
+        
     
-    <nav class="navbar">
-        <div class="logo">Secure Logic</div>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-        <div class="nav-links">
+
+/* Universal Box Styling */
+.hover-box {
+    z-index: 9999;
+/*    background: rgba(255, 255, 255, 0.05);*/
+    padding: 3px;
+    text-align: center;
+    width: 140px;
+    height: 60px; /* Fixed height */
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Add Borders for Universal Elements */
+.hover-box::before,
+.hover-box::after,
+.hover-box span::before,
+.hover-box span::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #5fffd7;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Position Borders Correctly */
+.hover-box::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+.hover-box::after { top: 0; right: 0; border-left: none; border-bottom: none; }
+.hover-box span::before { bottom: 0; left: 0; border-right: none; border-top: none; }
+.hover-box span::after { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+/* Universal Hover Effect */
+.hover-box:hover {
+    color: #5fffd7;
+    transform: scale(1.1); /* Slightly zoom in */
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure Borders Become More Visible on Hover */
+.hover-box:hover::before,
+.hover-box:hover::after,
+.hover-box:hover span::before,
+.hover-box:hover span::after {
+    opacity: 1;
+}
+
+/* Apply to All Images and Icons Inside */
+.hover-box img, .hover-box i {
+    width: 70px;
+    height: auto;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+.hover-box:hover img, 
+.hover-box:hover i {
+    transform: scale(1.2);
+}
+
+         @media (max-width: 768px) {
+         .menu-toggle {
+         display: block;
+         }
+         .nav-links {
+         display: none;
+         flex-direction: column;
+         gap: 10px;
+         background: #001a33;
+         width: 100%;
+         position: absolute;
+         top: 60px;
+         left: 0;
+         padding: 10px 0;
+         }
+         .nav-links.active {
+         display: flex;
+         }
+         .hero {
+         flex-direction: column;
+         text-align: center;
+         padding: 20px;
+         }
+         .hero-text {
+         max-width: 100%;
+         font-weight: 20px;
+         }
+         .hero-img {
+         margin-top: 20px;
+         }
+         .talk-to-us {
+         display: none;
+         }
+         .hover-box
+          {
+         display: none;
+         }
+         .benefit-section {
+         flex-direction: column;
+         padding: 30px 5%;
+         text-align: center;
+         }
+         .benefit-img {
+         margin-top: 20px;
+         justify-content: center;
+         }
+         .benefit-text h2 {
+         font-size: 30px;
+         }
+         .benefit-text p {
+         font-size: 16px;
+         }
+
+
+         .why-us {
+         flex-direction: column;
+         padding: 30px 5%;
+         text-align: center;
+         }
+         .why-us-img {
+         margin-top: 20px;
+         justify-content: center;
+         }
+         .why-us-text h2 {
+         font-size: 30px;
+         }
+         .why-us-text p {
+         font-size: 16px;
+         }
+         @media (max-width: 576px) { 
+         .menu-toggle {
+         display: block;
+         }
+         .nav-links {
+         display: none;
+         flex-direction: column;
+         gap: 10px;
+         background: #001a33;
+         width: 100%;
+         position: absolute;
+         top: 60px;
+         left: 0;
+         padding: 10px 0;
+         }
+         .nav-links.active {
+         display: flex;
+         }
+         .hero {
+         flex-direction: column;
+         text-align: center;
+         padding: 20px;
+         }
+         .hero h1
+         {
+         font-size: 50px;
+         }
+         .hero-text {
+         max-width: 100%;
+         font-size: 18px;
+         }
+         .hero-img {
+         margin-top: -430px;
+         }
+         .talk-to-us {
+         display: none;
+         }
+         }
+      </style>
+      <script>
+         function toggleMenu() {
+             document.querySelector('.nav-links').classList.toggle('active');
+         }
+
+      </script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate benefit image (slides in from the left)
+    gsap.fromTo(".benefit-img", 
+      { opacity: 0, x: -100 }, 
+      { 
+        opacity: 1, 
+        x: 0, 
+        duration: 0.1, 
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".benefit-img",
+          start: "top 90%",
+          end: "top 40%",
+          toggleActions: "play reverse play reverse",
+          scrub: 1
+        }
+      }
+    );
+
+    // Animate benefit text (slides in from the right)
+    gsap.fromTo(".benefit-text", 
+      { opacity: 0, x: 100 }, 
+      { 
+        opacity: 1, 
+        x: 0, 
+        duration: 0.1, 
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".benefit-text",
+          start: "top 90%",
+          end: "top 40%",
+          toggleActions: "play reverse play reverse",
+          scrub: 1
+        }
+      }
+    );
+  });
+</script>
+
+
+
+   </head>
+   <body>
+      <!-- Vertical Lines Container -->
+      <div class="vertical-lines-container">
+         <div class="vertical-line"></div>
+         <div class="vertical-line"></div>
+         <div class="vertical-line"></div>
+         <div class="vertical-line"></div>
+         <div class="vertical-line"></div>
+         <div class="vertical-line"></div>
+         <div class="vertical-line"></div>
+      </div>
+      <nav class="navbar">
+         <div class="logo">Secure Logic</div>
+         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+         <div class="nav-links">
             <a href="#" class="nav-item"><span>Home</span></a>
             <a href="#" class="nav-item"><span>About</span></a>
             <a href="#" class="nav-item"><span>Services</span></a>
             <a href="#" class="nav-item"><span>Pricing</span></a>
             <a href="#" class="nav-item"><span>Contact</span></a>
-        </div>
-        <a href="#" class="talk-to-us">Talk to Us</a>
-    </nav>
-    
-    <section class="hero">
-        <div class="hero-text">
+         </div>
+
+         <div class="hover-box">
+         <a href="#" class="talk-to-us">Talk to Us</a>
+            <span></span> 
+         </div>
+      </nav>
+      <section class="hero">
+         <div class="hero-text">
             <h1>Your Data Center Cloud   </h1>
- 
-             <p><span style="color: #42E8E0;"> Focus on your business-we’ll<br> handle the rest.</span></p>
-            <a href="#" class="hero-btn">Talk to Us</a>
-        </div>
-     
-        </div>
-        <div class="hero-img">
+            <p><span style="color: #42E8E0;"> Focus on your business-we’ll<br> handle the rest.</span></p>
+           <!-- <div class="hover-box">  -->
+            <a href="#" class="hero-btn">Talk to Us</a> <!-- <span></span> 
+         </div> -->
+         </div>
+         </div>
+         <div class="hero-img">
             <img src="securelogicbanner.png" alt="Hero Image">
-        </div>
-    </section>
- 
+         </div>
+      </section>
 
-
-    <div style="background-color: #42E8E0; height: 350px;"></div>
+      <div style="background-color: #42E8E0; height: 350px;"></div>
+      <!-- <div style="background: rgb(2,103,140);background: radial-gradient(circle at bottom right,rgba(2,103,140,1) 0%, rgba(8,0,66,1) 52%); height: 450px;"></div> -->
+      <!-- Benefit Section (Image on the left, Text on the right) -->
    
-    <!-- <div style="background: rgb(2,103,140);background: radial-gradient(circle at bottom right,rgba(2,103,140,1) 0%, rgba(8,0,66,1) 52%); height: 450px;"></div> -->
-
-
- <!-- Benefit Section (Image on the left, Text on the right) -->
-    <section class="benefit-section">
-        <div class="benefit-img">
+      <section class="benefit-section">
+         <div class="benefit-img">
             <img src="benefitsectionimage.png" alt="Benefit Image">
-        </div>
-        <div class="benefit-text">
+         </div>
+         <div class="benefit-text">
             <h2>One-size-fits-all hosting doesn’t work for everyone. </h2>
             <p style="margin-top: 50px;">That’s why we provide bespoke solutions that fit your exact needs, backed by high-performance infrastructure and expert support. Focus on your business—we’ll handle the rest.</p>
-
             <p>That’s why we deliver bespoke cloud environments designed around your exact needs—giving you the performance, flexibility, and operational efficiency that other solutions can’t. Backed by high-performance infrastructure and expert, hands-on support, we ensure your workloads run seamlessly.</p>
             <a style="margin-top: 50px;" href="#" class="benefit-btn">Learn More</a>
+         </div>
+      </section>
 
+
+
+
+
+      <section  class="hosting-services">
+
+
+
+         <style>
+            .hosting-services {
+            background: rgb(2,103,140);
+            background: radial-gradient(circle at bottom left, rgba(2,103,140,1) 0%, rgba(8,0,66,1) 52%);
+            color: #00eaff;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 90px;
+            padding: 100px;          
+            margin: auto;
+            min-height: 580px;
+            text-align: center;
+
+            }
+
+            .services-title {
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            /*            margin-bottom: 10px;*/
+            }
+            .service-box {
+            z-index: 9999;  /* Highest layer */
+
+            padding: 15px;
+            text-align: center;
+            width: 300px;
+            min-height: 300px;
+            position: relative;background: rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+              height: 250px; /* Fixed height */
+            }
+            .service-box::before,
+            .service-box::after,
+            .service-box span::before,
+            .service-box span::after {
+                content: "";
+                position: absolute;
+                width: 10px;
+                height: 10px; 
+                border: 2px solid #5fffd7;
+                opacity: 1;
+
+                transition: opacity 0.3s ease;
+            }
+
+            /* Top-Left Corner */
+            .service-box::before {
+                top: 0;
+                left: 0;
+                border-right: none;
+                border-bottom: none;
+            }
+
+            /* Top-Right Corner */
+            .service-box::after {
+                top: 0;
+                right: 0;
+
+                border-left: none;
+                border-bottom: none;
+            }
+
+            /* Bottom-Left Corner */
+            .service-box span::before {
+                bottom: 0;
+                left: 0;
+                border-right: none;
+                border-top: none;
+            }
+
+            /* Bottom-Right Corner */
+            .service-box span::after {
+                bottom: 0;
+                right: 0;
+                border-left: none;
+                border-top: none;
+            }
+
+            /* Hover Effect */
+            .service-box:hover {
+                color: #5fffd7;
+                transform: scale(1.4);
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .service-box:hover::before,
+            .service-box:hover::after,
+            .service-box:hover span::before,
+            .service-box:hover span::after {
+                opacity: 1;
+            }
+
+            .service-box img {
+            width: 70px;
+            height: auto;
+            transition: 0.3s;
+            margin-bottom: 10px;
+            }
+            .service-box h3 {
+            font-size: 1rem;
+            transition: 0.3s;
+            }
+            .service-box p {
+            font-size: 12px;
+            color: #ddd;
+            opacity: 0;
+            max-height: 0;
+            transition: 0.3s;
+            text-align: center;
+            line-height: 18px;
+            }
+            .service-box:hover p {
+            opacity: 1;
+            max-height: 100px;
+            margin-top: 10px;
+
+            }
+            @media (max-width: 768px) {
+            .hosting-services {
+            flex-direction: column;
+            align-items: center;
+            }
+            .service-box {
+            width: 100%;
+            }
+            }
+         </style>
+         <div class="services-title">Our Services</div>
+         <div class="service-box">
+             <span></span> 
+            <img src="bespokeinfastructure.png" alt="VPS Hosting">
+            <h3>Bespoke Infrastructure</h3>
+            <p>Your workloads aren’t one-size-fits-all—your infrastructure shouldn’t be either. We design custom compute, storage, and networking solutions tailored to your exact requirements, ensuring the control, performance, and flexibility that public cloud platforms can’t provide.  </p>
+         </div>
+         <div class="service-box">
+            <span></span> 
+            <img src="specializedperformance.png" alt="Shared Hosting">
+            <h3>Specialized Performance </h3>
+            <p>Abstracted cloud environments can introduce latency, noisy neighbors, and unpredictable resource availability. We eliminate those challenges by delivering dedicated, high-performance infrastructure, fine-tuned to meet your workload’s demands—so you get consistent, optimized performance every time. </p>
+         </div>
+         <div class="service-box">
+            <span></span> 
+            <img src="cloudeconomics.png" alt="Cloud Hosting">
+            <h3>Cloud Economics</h3>
+            <p>Why choose between the rigidity of on-prem and the hidden costs of public cloud? Our OpEx-driven model gives you the ability to scale, swap, or upgrade hardware on demand—without the capital expenditure burden. Get the efficiency of cloud with the cost transparency and control of a dedicated environment.  </p>
+         </div>
+         <div class="service-box">
+            <span></span> 
+            <img src="conciergelevelservice.png" alt="Dedicated Server Hosting">
+            <h3>Concierge-Level Service</h3>
+            <p>We don’t just provide infrastructure—we become an extension of your team. From initial design to ongoing optimization, our experts work side by side with you to ensure your environment is always aligned with your business goals. No tickets, no queues—just direct access to engineers who know your environment inside and out.  </p>
+         </div>
+         <!--  <div class="service-box">
+            <img src="https://via.placeholder.com/80" alt="Enterprise Hosting">
+            <h3>Enterprise Hosting & Custom Solutions</h3>
+            <p>Tailored hosting solutions for large-scale businesses.</p>
+            </div> -->
+      </section>
+      <!-- Benefit Section (Image on the left, Text on the right) -->
+   
+
+
+
+<section class="why-us">
+
+
+   <div class="why-us-text">
+      <h2>At Secure Logic, we build bespoke cloud environments that adapt to your specific needs—offering flexibility that traditional cloud providers simply can’t</h2>
+      <p style="margin-top: 50px;">In public cloud platforms, abstracted underlying systems can introduce performance inconsistencies, limited hardware control, and unpredictable costs. We take a different approach, working closely with our customers to design custom compute, storage, and networking solutions, enabling workloads that previously required an on-premises setup as the only option.</p>
+      <p>Traditional on-prem infrastructure comes with high upfront costs, rigid hardware, and long deployment cycles. With Secure Logic, you gain the agility of an OpEx model, giving you the power to scale, swap, or upgrade hardware on demand—without the financial and operational burden of ownership.</p>
+      <!-- <a style="margin-top: 50px;" href="#" class="why-us-btn">Learn More</a> -->
+   </div>
+   <div class="why-us-img">
+      <img src="whyus1.png" alt="Why Us Image">
+   </div>
+</section>
+
+
+ <section  style="background: rgb(66,232,224); background: linear-gradient(90deg, rgba(66,232,224,1) 0%, rgba(24,13,91,1) 80%);"class="benefit-section">
+         <div class="benefit-img">
+            <img src="whyus2.png" alt="Benefit Image">
+         </div>
+         <div class="benefit-text">
+            <h2>Whether you're launching a new application, expanding your footprint, or modernizing your IT stack, we deliver tailored, high-performance infrastructure—ready to deploy in just 72 hours.</h2>
+            <p style="margin-top: 50px; font-size: 30px;">Let’s build an agile, optimized environment on your terms. </p>
+             <a style="margin-top: 50px;" href="#" class="benefit-btn">Get Started Today</a>
+         </div>
+      </section>
+
+
+
+
+<style>
+
+.why-us-3 {
+    background-color: #42E8E0;
+    text-align: center;
+    padding: 80px 10%;
+    color: #0B1545; /* Adjust text color */
+}
+
+.why-us-3-content h1 {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.why-us-3-content p {
+    font-size: 18px;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+</style>
+
+
+
+<section class="why-us-3">
+    <div class="why-us-3-content">
+        <h1>Faster, smarter, no compromises.</h1>
+        <p>Public cloud lacks control. On-prem is costly and rigid. Secure Logic delivers bespoke cloud environments—custom compute, storage, and networking without public cloud limitations or on-prem expenses. With our OpEx model, scale, swap, or upgrade hardware as needed. Get consistent performance, cost efficiency, and deployment in just 72 hours.</p>
+    </div>
+</section>
+
+  
+        
+<style>
+/* Footer Styling */
+.footer {
+    background: rgb(2,103,140);
+    background: linear-gradient(to right, rgba(2,103,140,1) 0%, rgba(8,0,66,1) 100%);
+    color: white;
+    padding: 50px 10%;
+    text-align: center;
+    height: 30vh;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-left {
+    flex: 1;
+    min-width: 250px;
+    text-align: left;
+}
+
+.footer-left h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.footer-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    position: relative;
+}
+
+.footer-nav a:hover {
+    text-decoration: underline;
+    color: #42E8E0;
+}
+
+.footer-right {
+    flex: 1;
+    min-width: 250px;
+    text-align: right;
+}
+
+.footer-right h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    margin-right: 60px;
+
+}
+
+.footer-form {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    color:red;
+}
+
+.footer-form input {
+    padding: 12px;
+    border: 1px solid #42E8E0;
+   
+    background: transparent;
+    color: white;
+    outline: none;
+    width: 200px;
+}
+
+.footer-form button {
+    padding: 12px 20px;
+    background: #42E8E0;
+    color: #000A2D;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+   
+    transition: 0.3s;
+}
+
+.footer-form button:hover {
+    background: #5fffd7;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-left {
+        text-align: center;
+        width: 100%;
+
+    }
+
+    .footer-right {
+        text-align: center;
+        width: 100%;
+    }
+
+    .footer-right h3 {
+        text-align: center;
+        margin-right:5px;
+        
+    }
+
+    .footer-nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .footer-form {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .footer-form input {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+
+    .footer-form button {
+        width: 100%;
+        max-width: 325px;
+    }
+
+    .footer {
+        min-height: 40vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+</style>
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h2>Focus on your business - we’ll handle the rest.</h2>
+            <nav class="footer-nav">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Pricing</a>
+                <a href="#">Contact</a>
+            </nav>
         </div>
-    </section>
+        <div class="footer-right">
+            <h3>Subscribe to our newsletter</h3>
+            <form class="footer-form">
+                <input type="email" placeholder="Enter your email"  required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</footer>
 
-</body>
+
+
+   </body>
 </html>
+
