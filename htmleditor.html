@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Editor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Table styling for preview only */
+    .html-preview table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .html-preview th,
+    .html-preview td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .html-preview thead {
+      background-color: #f1f5f9;
+    }
+   
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- Sidebar and Main Content -->
+  <div class="flex flex-1">
+
+    <!-- Sidebar -->
+    <div class="bg-blue-600 text-white w-64 p-4 space-y-4">
+      <h1 class="text-xl font-bold text-center">HTML Editor</h1>
+      <div class="space-y-2">
+        <button class="w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-800">
+          Dashboard
+        </button>
+       <!--  <button class="w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-800">
+          Convert
+        </button>   --> 
+
+        <div class="text-center mb-4">
+          <button onclick="convertToHTML()" class="w-full bg-blue-700 text-white py-2 rounded hover:bg-blue-800">
+            Convert to HTML
+          </button>
+        </div>    
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 p-6 overflow-y-auto">
+
+      <!-- Top Bar for Mobile -->
+      <div class="block md:hidden mb-4">
+        <button id="sidebar-toggle" class="bg-blue-600 text-white p-2 rounded">
+          Open Sidebar
+        </button>
+      </div>
+
+      <!-- Content -->
+      
+
+        <!-- <h2 class="text-3xl font-bold mb-5">Create Clean HTML</h2> -->
+        <div class="max-w-6xl mx-auto flex flex-wrap md:flex-nowrap gap-8">
+ 
+    
+  <!-- Content Editor Section -->
+  <div class="w-full md:w-1/2">
+    
+    <label class="block text-gray-700 mb-2 text-lg">Paste or type your formatted content:</label>
+    <div id="editor" contenteditable="true"
+         class="bg-white border border-gray-300 rounded p-5 min-h-[600px] focus:outline-none mb-5 text-lg"></div>
+
+    <!-- <div class="text-center mb-5">
+      <button onclick="convertToHTML()" class="bg-blue-600 text-white px-8 py-3 text-lg rounded hover:bg-blue-700">
+        Convert to HTML
+      </button>
+    </div> -->
+  </div>
+
+  <!-- Output Section -->
+  <div class="w-full md:w-1/2">
+    <label class="block text-gray-700 mb-2 text-lg">Generated HTML:</label>
+    <textarea id="output"
+              class="w-full p-4 border border-gray-300 rounded bg-white h-[600px] resize-none font-mono text-lg mb-5"
+              readonly></textarea>
+
+  <!--   <label class="block text-gray-700 mb-2 text-lg">Preview (only tables are styled):</label>
+    <div class="html-preview bg-white border border-gray-300 rounded p-5 min-h-[150px] text-lg" id="output-preview"></div> -->
+  </div>
+
+</div>
+
+    </div>
+  </div>
+
+  <!-- Sidebar Toggle Script for Mobile -->
+  <script>
+    const toggleButton = document.getElementById("sidebar-toggle");
+    const sidebar = document.querySelector(".flex-1");
+    
+    toggleButton.addEventListener("click", () => {
+      sidebar.classList.toggle("hidden");
+    });
+
+    function convertToHTML() {
+      const editor = document.getElementById("editor");
+      const output = document.getElementById("output");
+      const preview = document.getElementById("output-preview");
+
+      const clone = editor.cloneNode(true);
+
+      clone.querySelectorAll("*").forEach(el => {
+        el.removeAttribute("style");
+        el.removeAttribute("class");
+        el.removeAttribute("id");
+        el.removeAttribute("dir");
+        el.removeAttribute("role");
+
+        // Remove aria-* attributes
+        [...el.attributes].forEach(attr => {
+          if (attr.name.startsWith("aria-")) {
+            el.removeAttribute(attr.name);
+          }
+        });
+      });
+
+      const cleanHTML = clone.innerHTML.trim();
+      output.value = cleanHTML;
+      preview.innerHTML = cleanHTML;
+    }
+  </script>
+</body>
+</html>
