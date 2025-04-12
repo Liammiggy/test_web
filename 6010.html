@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GreenTech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-800">
+
+    <!-- Wrapper -->
+    <div class="wrapper min-h-screen flex flex-col">
+
+      <!-- Navbar -->
+      <header class="bg-gradient-to-r from-green-400 to-green-600 text-white shadow">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 class="text-2xl font-bold">GreenTech</h1>
+          <!-- Navbar for large screens -->
+          <nav class="hidden md:flex space-x-6">
+            <a href="#about" class="hover:text-gray-200">About Us</a>
+            <a href="#why" class="hover:text-gray-200">Why Us</a>
+            <a href="#services" class="hover:text-gray-200">Services</a>
+            <a href="#customers" class="hover:text-gray-200">Customers</a>
+            <a href="#testimonials" class="hover:text-gray-200">Testimonials</a>
+            <a href="#contact" class="hover:text-gray-200">Contact</a>
+          </nav>
+
+          <!-- Burger Menu for small screens -->
+          <div class="md:hidden flex items-center">
+            <button id="burgerMenu" class="text-white focus:outline-none">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mobile menu -->
+      <nav id="mobileMenu" class="md:hidden bg-gradient-to-r from-green-400 to-green-600 text-white space-y-4 py-6 px-6 hidden">
+        <a href="#about" class="block hover:text-gray-200">About Us</a>
+        <a href="#why" class="block hover:text-gray-200">Why Us</a>
+        <a href="#services" class="block hover:text-gray-200">Services</a>
+        <a href="#customers" class="block hover:text-gray-200">Customers</a>
+        <a href="#testimonials" class="block hover:text-gray-200">Testimonials</a>
+        <a href="#contact" class="block hover:text-gray-200">Contact</a>
+      </nav>
+
+      <!-- Hero Section -->
+      <section id="hero" class="relative h-screen bg-gradient-to-r from-green-600 to-green-800 text-white flex flex-col justify-center items-center">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="container mx-auto px-6 z-10 text-center">
+          <h2 class="text-4xl font-bold mb-4">Powering the Future with Sustainable Energy</h2>
+          <p class="text-xl mb-8">Join us in our mission to create a greener, cleaner, and more energy-efficient world.</p>
+          <a href="#about" class="bg-white text-green-600 px-6 py-3 rounded-full text-xl font-semibold hover:bg-gray-200 transition">Learn More</a>
+        </div>
+      </section>
+
+      <!-- Our Work in Action -->
+      <section id="carousel" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+          <h2 class="text-3xl font-bold mb-6 text-center">Our Work in Action</h2>
+          <div class="relative">
+            <div class="carousel-container w-full overflow-hidden">
+              <div class="carousel-inner flex">
+                <div class="carousel-item w-full">
+                  <img src="https://via.placeholder.com/1200x600/0000FF/808080?text=Project+1" alt="Project 1" class="w-full h-96 object-cover rounded-lg shadow-lg cursor-pointer" onclick="alert('Project 1')"/>
+                </div>
+                <div class="carousel-item w-full">
+                  <img src="https://via.placeholder.com/1200x600/FF0000/FFFFFF?text=Project+2" alt="Project 2" class="w-full h-96 object-cover rounded-lg shadow-lg cursor-pointer" onclick="alert('Project 2')"/>
+                </div>
+                <div class="carousel-item w-full">
+                  <img src="https://via.placeholder.com/1200x600/00FF00/FFFFFF?text=Project+3" alt="Project 3" class="w-full h-96 object-cover rounded-lg shadow-lg cursor-pointer" onclick="alert('Project 3')"/>
+                </div>
+              </div>
+            </div>
+            <button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full" id="prevBtn">&#10094;</button>
+            <button class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full" id="nextBtn">&#10095;</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Our Services -->
+      <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+          <h2 class="text-3xl font-bold mb-6 text-center">Our Services</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="service-card bg-white p-6 rounded-lg shadow-lg text-center">
+              <h3 class="text-xl font-semibold mb-4">Solar Energy</h3>
+              <p class="text-gray-600 mb-4">Efficient and cost-effective solar power solutions for residential and commercial use.</p>
+              <a href="#" class="text-green-600 font-semibold hover:text-green-800">Learn More</a>
+            </div>
+            <!-- Card 2 -->
+            <div class="service-card bg-white p-6 rounded-lg shadow-lg text-center">
+              <h3 class="text-xl font-semibold mb-4">Wind Energy</h3>
+              <p class="text-gray-600 mb-4">Harnessing the power of the wind for sustainable energy generation.</p>
+              <a href="#" class="text-green-600 font-semibold hover:text-green-800">Learn More</a>
+            </div>
+            <!-- Card 3 -->
+            <div class="service-card bg-white p-6 rounded-lg shadow-lg text-center">
+              <h3 class="text-xl font-semibold mb-4">Energy Storage</h3>
+              <p class="text-gray-600 mb-4">Reliable energy storage systems to ensure uninterrupted power supply.</p>
+              <a href="#" class="text-green-600 font-semibold hover:text-green-800">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Our Customers -->
+      <section id="customers" class="py-20 bg-gradient-to-r from-green-400 to-green-600 text-white">
+        <div class="container mx-auto px-6 text-center">
+          <h2 class="text-3xl font-bold mb-6">Our Customers</h2>
+          <div class="relative">
+            <div class="carousel-container w-full overflow-hidden">
+              <div class="carousel-inner flex">
+                <div class="carousel-item w-full">
+                  <img src="https://via.placeholder.com/1200x600/0000FF/FFFFFF?text=Customer+1" alt="Customer 1" class="w-full h-96 object-cover rounded-lg shadow-lg cursor-pointer" onclick="alert('Customer 1')"/>
+                </div>
+                <div class="carousel-item w-full">
+                  <img src="https://via.placeholder.com/1200x600/FF0000/FFFFFF?text=Customer+2" alt="Customer 2" class="w-full h-96 object-cover rounded-lg shadow-lg cursor-pointer" onclick="alert('Customer 2')"/>
+                </div>
+                <div class="carousel-item w-full">
+                  <img src="https://via.placeholder.com/1200x600/00FF00/FFFFFF?text=Customer+3" alt="Customer 3" class="w-full h-96 object-cover rounded-lg shadow-lg cursor-pointer" onclick="alert('Customer 3')"/>
+                </div>
+              </div>
+            </div>
+            <button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full" id="prevBtnCustomer">&#10094;</button>
+            <button class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full" id="nextBtnCustomer">&#10095;</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section id="testimonials" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+          <h2 class="text-3xl font-bold mb-6">Testimonials</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="testimonial bg-white p-6 rounded-lg shadow-lg text-center">
+              <p class="text-gray-600 mb-4">"GreenTech's solar energy solutions helped us reduce our bills by 30%. Highly recommended!"</p>
+              <h4 class="font-semibold">John Doe</h4>
+              <p class="text-gray-500">CEO, Company XYZ</p>
+            </div>
+            <div class="testimonial bg-white p-6 rounded-lg shadow-lg text-center">
+              <p class="text-gray-600 mb-4">"The wind energy systems provided by GreenTech are top-notch and extremely reliable."</p>
+              <h4 class="font-semibold">Jane Smith</h4>
+              <p class="text-gray-500">Operations Manager, Tech Corp</p>
+            </div>
+            <div class="testimonial bg-white p-6 rounded-lg shadow-lg text-center">
+              <p class="text-gray-600 mb-4">"Our business has been running smoothly thanks to GreenTech's energy storage solutions."</p>
+              <h4 class="font-semibold">Michael Brown</h4>
+              <p class="text-gray-500">Founder, StartUp Inc.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6 text-center">
+          <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
+          <p class="text-gray-600 mb-6">Get in touch with us for more information about our services.</p>
+          <a href="mailto:info@greentech.com" class="bg-green-600 text-white px-6 py-3 rounded-full text-xl font-semibold hover:bg-green-700">Email Us</a>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="bg-gradient-to-r from-green-400 to-green-600 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+          <p>&copy; 2025 GreenTech. All rights reserved.</p>
+        </div>
+      </footer>
+
+    </div>
+
+    <script>
+      // Burger menu functionality
+      const burgerMenu = document.getElementById('burgerMenu');
+      const mobileMenu = document.getElementById('mobileMenu');
+      
+      burgerMenu.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Carousel functionality for "Our Work in Action"
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const carouselInner = document.querySelector('.carousel-inner');
+      let currentIndex = 0;
+
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < 2) {
+          currentIndex++;
+          carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+      });
+
+      // Carousel functionality for "Our Customers"
+      const prevBtnCustomer = document.getElementById('prevBtnCustomer');
+      const nextBtnCustomer = document.getElementById('nextBtnCustomer');
+      const carouselInnerCustomer = document.querySelector('.carousel-inner');
+      let currentIndexCustomer = 0;
+
+      prevBtnCustomer.addEventListener('click', () => {
+        if (currentIndexCustomer > 0) {
+          currentIndexCustomer--;
+          carouselInnerCustomer.style.transform = `translateX(-${currentIndexCustomer * 100}%)`;
+        }
+      });
+
+      nextBtnCustomer.addEventListener('click', () => {
+        if (currentIndexCustomer < 2) {
+          currentIndexCustomer++;
+          carouselInnerCustomer.style.transform = `translateX(-${currentIndexCustomer * 100}%)`;
+        }
+      });
+    </script>
+  </body>
+</html>
