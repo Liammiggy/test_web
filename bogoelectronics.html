@@ -5,24 +5,31 @@
   <title>Bogo Electronics & Service Center</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @media print {
-      body * {
-        visibility: hidden;
-      }
-      #print-area, #print-area * {
-        visibility: visible;
-      }
-      #print-area {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 210mm;
-        height: 297mm;
-        padding: 20mm;
-        box-sizing: border-box;
-        background: white;
-      }
-    }
+   @media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #print-area, #print-area * {
+    visibility: visible;
+  }
+
+  #header, #footer, .header, .footer {
+    display: none !important;
+  }
+
+  #print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm;
+    height: 297mm;
+    padding: 20mm;
+    box-sizing: border-box;
+    background: white;
+  }
+}
+
   </style>
 </head>
 <body class="bg-gray-100 p-4">
