@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Purchase Order</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200">
+  <div class="max-w-7xl mx-auto mt-10 p-6 bg-white rounded shadow-md">
+    <h2 class="text-2xl font-semibold text-teal-700 mb-6">Create Purchase Order</h2>
+
+    <!-- Top Form Fields -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <select class="border border-teal-700 rounded px-3 py-2">
+        <option>Header(Embryo)</option>
+      </select>
+      <select class="border border-teal-700 rounded px-3 py-2">
+        <option>Status (PENDING)</option>
+      </select>
+      <input type="date" class="border border-teal-700 rounded px-3 py-2">
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <input type="text" placeholder="Supplier Name" class="border border-teal-700 rounded px-3 py-2">
+      <input type="text" placeholder="Supplier Address" class="border border-teal-700 rounded px-3 py-2">
+      <input type="text" placeholder="Address" class="border border-teal-700 rounded px-3 py-2">
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <input type="text" placeholder="TIN" class="border border-teal-700 rounded px-3 py-2">
+      <input type="text" placeholder="Purchase order number" class="border border-teal-700 rounded px-3 py-2">
+      <input type="text" placeholder="Purchase request number" class="border border-teal-700 rounded px-3 py-2">
+    </div>
+
+    <!-- Table Headers -->
+    <div class="overflow-x-auto mb-4">
+      <table class="min-w-full text-sm text-left border-collapse">
+        <thead class="bg-teal-700 text-white">
+          <tr>
+            <th class="px-2 py-2 border">No</th>
+            <th class="px-2 py-2 border">Qty</th>
+            <th class="px-2 py-2 border">Item</th>
+            <th class="px-2 py-2 border">Description</th>
+            <th class="px-2 py-2 border">Price</th>
+            <th class="px-2 py-2 border">Discounts</th>
+            <th class="px-2 py-2 border">Amount</th>
+            <th class="px-2 py-2 border">Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-gray-100">
+            <td class="border px-2 py-2"><input type="text" class="w-full px-1 py-1 border rounded"></td>
+            <td class="border px-2 py-2"><input type="text" class="w-full px-1 py-1 border rounded"></td>
+            <td class="border px-2 py-2"><input type="text" class="w-full px-1 py-1 border rounded"></td>
+            <td class="border px-2 py-2"><input type="text" class="w-full px-1 py-1 border rounded"></td>
+            <td class="border px-2 py-2"><input type="text" class="w-full px-1 py-1 border rounded"></td>
+            <td class="border px-2 py-2"><input type="text" class="w-full px-1 py-1 border rounded"></td>
+            <td class="border px-2 py-2"><input type="text" class="w-full px-1 py-1 border rounded"></td>
+            <td class="border px-2 py-2"><input type="text" class="w-full px-1 py-1 border rounded"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Summary -->
+    <div class="flex justify-end mb-4">
+      <div class="text-sm text-right space-y-1">
+        <p>Subtotal <span class="ml-6">0.00</span></p>
+        <p>Tax <span class="ml-14">0.00</span></p>
+        <p class="font-semibold">Total <span class="ml-12">0.00</span></p>
+      </div>
+    </div>
+
+    <!-- Footer Fields -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <select class="border border-teal-700 rounded px-3 py-2">
+        <option>Requested by</option>
+      </select>
+      <select class="border border-teal-700 rounded px-3 py-2">
+        <option>Approved by</option>
+      </select>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-end gap-4">
+      <button class="bg-teal-500 text-white px-6 py-2 rounded hover:bg-teal-600">Print</button>
+      <button class="bg-teal-700 text-white px-6 py-2 rounded hover:bg-teal-800">Generate Purchase order</button>
+    </div>
+  </div>
+</body>
+</html>
