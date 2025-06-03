@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bogo Electronics & Service Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #print-area, #print-area * {
+        visibility: visible;
+      }
+      #print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        padding: 20mm;
+        box-sizing: border-box;
+        background: white;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-4">
+
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded shadow space-y-4">
+    <!-- <h1 class="text-2xl font-bold">Quotation Generator</h1> -->
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium">Customer Name</label>
+        <input type="text" id="customerName" class="border p-2 rounded w-full" placeholder="e.g. Juan Dela Cruz" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Customer Address</label>
+        <input type="text" id="customerAddress" class="border p-2 rounded w-full" placeholder="e.g. 123 Main St, Manila" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Project Name</label>
+        <input type="text" id="projectName" class="border p-2 rounded w-full" placeholder="e.g. Website Redesign" />
+      </div>
+    </div>
+
+    <div id="items" class="space-y-4 mt-4"></div>
+    <button onclick="addItem()" class="bg-blue-500 text-white px-4 py-2 rounded">Add Item</button>
+
+    <div class="text-right mt-6">
+      <span class="font-bold text-xl">Total: ₱<span id="total">0.00</span></span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <div>
+        <label class="block text-sm font-medium">Prepared By</label>
+        <input type="text" id="preparedBy" class="border p-2 rounded w-full" placeholder="Your Name" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Date</label>
+        <input type="date" id="quoteDate" class="border p-2 rounded w-full" />
+      </div>
+    </div>
+
+    <button onclick="printQuotation()" class="mt-6 bg-green-600 text-white px-6 py-2 rounded">Print Quotation</button>
+  </div>
+
+  <!-- Printable Section -->
+  <div id="print-area" class="hidden">
+    <div class="flex justify-between items-center mb-6">
+      <img src="besc.jpg" alt="Company Logo" class="h-20">
+      <div class="text-right">
+        <h1 class="text-2xl font-bold">Bogo Electronics & Service Center</h1>
+        <p>New Public Market, Cantecson, Gairan, Bogo City, Cebu</p>
+        <p>Email: bogoelectronics@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <p class="mb-1">To:</p>
+      <p id="print-customer-name" class="font-semibold"></p>
+      <p id="print-customer-address"></p>
+    </div>
+
+    <h2 class="text-xl font-bold mb-2">Quotation</h2>
+    <p class="mb-4"><strong>Project:</strong> <span id="print-project-name"></span></p>
+
+    <table class="w-full border-collapse border border-gray-500 mb-6">
+      <thead>
+        <tr>
+          <th class="border border-gray-500 p-2 text-left">Item</th>
+          <th class="border border-gray-500 p-2 text-left">Description</th>
+          <th class="border border-gray-500 p-2 text-right">Price (₱)</th>
+        </tr>
+      </thead>
+      <tbody id="print-rows"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2" class="border border-gray-500 p-2 text-right font-bold">Total</td>
+          <td class="border border-gray-500 p-2 text-right font-bold">₱<span id="print-total">0.00</span></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="mt-8">
+      <p><strong>Prepared By:</strong> <span id="print-prepared-by"></span></p>
+      <p><strong>Date:</strong> <span id="print-date"></span></p>
+    </div>
+  </div>
+
+  <script>
+    function addItem() {
+      const container = document.getElementById('items');
+      const row = document.createElement('div');
+      row.className = "grid grid-cols-3 gap-2";
+      row.innerHTML = `
+        <input type="text" placeholder="Item" class="item border p-2 rounded" />
+        <input type="text" placeholder="Description" class="desc border p-2 rounded" />
+        <input type="number" placeholder="Price" class="price border p-2 rounded" oninput="calculateTotal()" />
+      `;
+      container.appendChild(row);
+    }
+
+    function calculateTotal() {
+      const prices = document.querySelectorAll('.price');
+      let total = 0;
+      prices.forEach(input => {
+        const val = parseFloat(input.value);
+        if (!isNaN(val)) total += val;
+      });
+      document.getElementById('total').textContent = total.toFixed(2);
+    }
+
+    function printQuotation() {
+      const items = document.querySelectorAll('#items .grid');
+      const printRows = document.getElementById('print-rows');
+      printRows.innerHTML = '';
+      let total = 0;
+
+      items.forEach(row => {
+        const item = row.querySelector('.item').value;
+        const desc = row.querySelector('.desc').value;
+        const price = parseFloat(row.querySelector('.price').value) || 0;
+        total += price;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="border border-gray-500 p-2">${item}</td>
+          <td class="border border-gray-500 p-2">${desc}</td>
+          <td class="border border-gray-500 p-2 text-right">${price.toFixed(2)}</td>
+        `;
+        printRows.appendChild(tr);
+      });
+
+      document.getElementById('print-total').textContent = total.toFixed(2);
+      document.getElementById('print-customer-name').textContent = document.getElementById('customerName').value;
+      document.getElementById('print-customer-address').textContent = document.getElementById('customerAddress').value;
+      document.getElementById('print-prepared-by').textContent = document.getElementById('preparedBy').value;
+      document.getElementById('print-date').textContent = document.getElementById('quoteDate').value;
+      document.getElementById('print-project-name').textContent = document.getElementById('projectName').value;
+
+      document.getElementById('print-area').classList.remove('hidden');
+      window.print();
+      document.getElementById('print-area').classList.add('hidden');
+    }
+
+    addItem(); // add first row on load
+  </script>
+
+</body>
+</html>
