@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Bogo Electronics & Service Center</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     @media print {
       body * {
@@ -28,8 +29,6 @@
 <body class="bg-gray-100 p-4">
 
   <div class="max-w-5xl mx-auto bg-white p-6 rounded shadow space-y-4">
-    <!-- <h1 class="text-2xl font-bold">Quotation Generator</h1> -->
-
     <div class="grid grid-cols-2 gap-4">
       <div>
         <label class="block text-sm font-medium">Customer Name</label>
@@ -63,11 +62,12 @@
       </div>
     </div>
 
-    <button onclick="printQuotation()" class="mt-6 bg-green-600 text-white px-6 py-2 rounded">Print Quotation</button>
+    <button onclick="exportAsJPG()" class="mt-2 bg-purple-600 text-white px-6 py-2 rounded">Export as JPG</button>
+    <button onclick="printQuotation(true)" class="mt-2 bg-green-600 text-white px-6 py-2 rounded">Print Quotation</button>
   </div>
-
+<br><br><br><br>
   <!-- Printable Section -->
-  <div id="print-area" class="hidden">
+  <div id="print-area" class="hidden bg-white p-6 w-[794px] h-[1123px] mx-auto">
     <div class="flex justify-between items-center mb-6">
       <img src="besc.jpg" alt="Company Logo" class="h-20">
       <div class="text-right">
@@ -139,7 +139,7 @@
       document.getElementById('total').textContent = total.toFixed(2);
     }
 
-    function printQuotation() {
+    function fillPrintArea() {
       const rows = document.querySelectorAll('#items .grid');
       const printRows = document.getElementById('print-rows');
       printRows.innerHTML = '';
@@ -170,14 +170,40 @@
       document.getElementById('print-prepared-by').textContent = document.getElementById('preparedBy').value;
       document.getElementById('print-date').textContent = document.getElementById('quoteDate').value;
       document.getElementById('print-project-name').textContent = document.getElementById('projectName').value;
-
-      document.getElementById('print-area').classList.remove('hidden');
-      window.print();
-      document.getElementById('print-area').classList.add('hidden');
     }
 
-    addItem(); // Add one item by default
-  </script>
+    function printQuotation(doPrint = true) {
+      fillPrintArea();
+      const printArea = document.getElementById("print-area");
+      printArea.classList.remove("hidden");
 
+      if (doPrint) {
+        window.print();
+        printArea.classList.add("hidden");
+      }
+    }
+
+    function exportAsJPG() {
+      fillPrintArea();
+      const printArea = document.getElementById("print-area");
+      printArea.classList.remove("hidden");
+
+      html2canvas(printArea, {
+        scale: 2,
+        width: 794,
+        height: 1123
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'quotation.jpg';
+        link.href = canvas.toDataURL("image/jpeg", 1.0);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        printArea.classList.add("hidden");
+      });
+    }
+
+    addItem(); // Add first row on load
+  </script>
 </body>
 </html>
