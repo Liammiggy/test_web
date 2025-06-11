@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>30 Days Computation - Stewardship</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #fff;
+    }
+
+    @media print {
+      body {
+        margin: 0;
+        padding: 0;
+        width: 210mm;
+        height: 297mm;
+        -webkit-print-color-adjust: exact;
+      }
+      .container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 20mm;
+      }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2, h3, h5, p, td, th, label {
+      text-align: left !important;
+    }
+
+    .label-bold {
+      font-weight: bold;
+    }
+
+    .text-red {
+      color: red;
+    }
+
+    table td, table th {
+      vertical-align: middle;
+    }
+
+    table {
+      font-size: 0.95rem;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="mb-4">
+      <h2>STEWARDSHIP</h2>
+      <p>Fe Bldg., Bogo Business Park, P. Rodriguez St.<br>
+         La Purisima Concepcion, Bogo City, Cebu 6010</p>
+      <h5>SUMMARY OF FINANCIAL GIFT ALLOCATIONS</h5>
+    </div>
+
+    <div class="mb-4">
+      <p><span class="label-bold">MEMBER'S NAME:</span> NOEL B. TORREJOS</p>
+      <p><span class="label-bold">BENEFIT CLAIM:</span> HOSPITALIZATION</p>
+    </div>
+
+    <h5>COMPUTATION OF HOSPITALIZATION BENEFITS - 30 DAYS</h5>
+
+    <form id="benefitForm" class="mt-4 mb-4">
+      <div class="row mb-2">
+        <div class="col-md-4">Active Members - <strong>543</strong></div>
+        <div class="col-md-4">Inactive Members - <strong>72</strong></div>
+        <div class="col-md-4">Deceased Members - <strong>17</strong></div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-6 col-form-label">Actual Collections in 30 Days:</label>
+        <div class="col-sm-4">
+          <input type="number" id="collectionInput" class="form-control" value="" step="0.01">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-6 col-form-label">Partial Payment in 7 Days:</label>
+        <div class="col-sm-4">
+          <input type="number" id="partialInput" class="form-control" value="" step="0.01">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-6 col-form-label">Penalty Percentage (% of Benefits):</label>
+        <div class="col-sm-4">
+          <input type="number" id="penaltyPercentInput" class="form-control" value="" step="0.01">
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-6 col-form-label">Misgivings Amount (Fixed):</label>
+        <div class="col-sm-4">
+          <input type="number" id="misgivingInput" class="form-control" value="" step="0.01">
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
+    </form>
+
+    <table class="table table-bordered">
+      <tbody>
+        <tr class="table-secondary">
+          <td colspan="2"><strong>ACTUAL COLLECTIONS IN THIRTY (30) DAYS:</strong></td>
+          <td colspan="2"><strong>PHP <span id="collections">0.00</span></strong></td>
+        </tr>
+        <tr>
+          <td colspan="2">MEMBER'S BENEFITS - (× 70%)</td>
+          <td colspan="2" id="benefits">0.00</td>
+        </tr>
+        <tr class="table-secondary">
+          <td colspan="4"><strong>LESS: DEDUCTIONS</strong></td>
+        </tr>
+        <tr>
+          <td colspan="2">PARTIAL PAYMENT IN SEVEN (7) DAYS</td>
+          <td colspan="2" class="text-red" id="partialPayment">0.00</td>
+        </tr>
+        <tr>
+          <td colspan="2">PENALTY (<span id="penaltyLabel">15%</span> of Benefits)</td>
+          <td colspan="2" class="text-red" id="penalty">0.00</td>
+        </tr>
+        <tr>
+          <td colspan="2">MISGIVINGS - (Manual Entry)</td>
+          <td colspan="2" class="text-red" id="misgivings">0.00</td>
+        </tr>
+        <tr>
+          <td colspan="2">WITHHOLDING - (10% of Benefits)</td>
+          <td colspan="2" class="text-red" id="withholding">0.00</td>
+        </tr>
+        <tr>
+          <td colspan="2"><strong>TOTAL DEDUCTIONS</strong></td>
+          <td colspan="2" class="text-red" id="totalDeductions">0.00</td>
+        </tr>
+        <tr class="table-success">
+          <td colspan="2"><strong>NET BENEFIT CLAIM</strong></td>
+          <td colspan="2" id="netBenefit">0.00</td>
+        </tr>
+        <tr>
+          <td colspan="2">CHURCH TITHES (10% of Benefit)</td>
+          <td colspan="2" id="tithes">0.00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function calculate() {
+      const collection = parseFloat(document.getElementById("collectionInput").value) || 0;
+      const partial = parseFloat(document.getElementById("partialInput").value) || 0;
+      const penaltyPercent = parseFloat(document.getElementById("penaltyPercentInput").value) || 0;
+      const misgivings = parseFloat(document.getElementById("misgivingInput").value) || 0;
+
+      const benefit = collection * 0.70;
+      const penalty = benefit * (penaltyPercent / 100);
+      const withholding = benefit * 0.10;
+
+      const totalDeductions = partial + penalty + misgivings + withholding;
+      const netBenefit = benefit - totalDeductions;
+      const tithes = benefit * 0.10;
+
+      document.getElementById("collections").innerText = collection.toLocaleString(undefined, { minimumFractionDigits: 2 });
+      document.getElementById("benefits").innerText = benefit.toLocaleString(undefined, { minimumFractionDigits: 2 });
+      document.getElementById("partialPayment").innerText = partial.toLocaleString(undefined, { minimumFractionDigits: 2 });
+      document.getElementById("penalty").innerText = penalty.toLocaleString(undefined, { minimumFractionDigits: 2 });
+      document.getElementById("penaltyLabel").innerText = penaltyPercent + '%';
+      document.getElementById("misgivings").innerText = misgivings.toLocaleString(undefined, { minimumFractionDigits: 2 });
+      document.getElementById("withholding").innerText = withholding.toLocaleString(undefined, { minimumFractionDigits: 2 });
+      document.getElementById("totalDeductions").innerText = totalDeductions.toLocaleString(undefined, { minimumFractionDigits: 2 });
+      document.getElementById("netBenefit").innerText = netBenefit.toLocaleString(undefined, { minimumFractionDigits: 2 });
+      document.getElementById("tithes").innerText = tithes.toLocaleString(undefined, { minimumFractionDigits: 2 });
+    }
+
+    window.onload = calculate;
+  </script>
+</body>
+</html>
