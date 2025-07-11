@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Rental Agreement</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      @page {
+        size: A4;
+        margin: 1in;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 px-8 py-10 max-w-[210mm] mx-auto text-[14px] leading-relaxed">
+
+  <h1 class="text-xl font-bold text-center mb-6">SAM CAR RENTAL AGREEMENT</h1>
+
+  <p class="mb-4">
+    This car rental agreement is made and entered into as of 
+    <input type="text" class="border-b border-gray-500 px-2 mx-1 w-32 inline-block" placeholder="Date" />
+    between 
+    <input type="text" class="border-b border-gray-500 px-2 mx-1 w-48 inline-block" placeholder="Owner Name" />
+    (owner) with an address at Purok Apple, Sitio Sapa, Bogo City, Cebu, and 
+    <input type="text" class="border-b border-gray-500 px-2 mx-1 w-48 inline-block" placeholder="Renter Name" />
+    (renter), with an address at 
+    <input type="text" class="border-b border-gray-500 px-2 mx-1 w-64 inline-block" placeholder="Address" />.
+  </p>
+
+  <div class="grid grid-cols-2 gap-4 mb-4">
+    <div>Make: <input type="text" class="border-b border-gray-500 w-40 ml-2" /></div>
+    <div>Year: <input type="text" class="border-b border-gray-500 w-24 ml-2" /></div>
+    <div>Plate Number: <input type="text" class="border-b border-gray-500 w-40 ml-2" /></div>
+    <div>Color: <input type="text" class="border-b border-gray-500 w-32 ml-2" /></div>
+  </div>
+
+  <h2 class="font-semibold mb-2">RENTAL FEES</h2>
+
+  <p class="mb-4">The renter agrees to pay the owner prior to the use of the vehicle in full amount.</p>
+
+  <div class="grid grid-cols-2 gap-4 mb-4">
+    <div>Rate per day: <input type="text" class="border-b border-gray-500 w-32 ml-2" /></div>
+    <div>Carwash: <input type="text" class="border-b border-gray-500 w-32 ml-2" /></div>
+    <div>Delivery: <input type="text" class="border-b border-gray-500 w-32 ml-2" /></div>
+    <div>Pick-up: <input type="text" class="border-b border-gray-500 w-32 ml-2" /></div>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4 mb-6">
+    <div>Start Date: <input type="text" class="border-b border-gray-500 w-32 ml-2" /> TIME: <input type="text" class="border-b border-gray-500 w-24 ml-2" /></div>
+    <div>End Date: <input type="text" class="border-b border-gray-500 w-32 ml-2" /> TIME: <input type="text" class="border-b border-gray-500 w-24 ml-2" /></div>
+    <div class="col-span-2">TOTAL AMOUNT: <input type="text" class="border-b border-gray-500 w-48 ml-2" /></div>
+  </div>
+
+  <ol class="list-decimal list-inside space-y-2 mb-6">
+    <li>The renter acknowledges the vehicle with plate no: <input type="text" class="border-b border-gray-500 w-32 ml-2" /> will not be used for speeding, overseas use, or any unlawful activity. If brought outside Cebu, a penalty of ₱10,000 will apply.</li>
+    <li>Only the authorized renter may use the vehicle. Unauthorized drivers will result in full liability and penalties for any damage or incident.</li>
+    <li>The renter is liable for any traffic offenses and agrees to settle all related fines or fees imposed during the rental period.</li>
+    <li>In case of accident, the renter must notify the owner immediately. Unauthorized repairs or towing will incur a ₱10,000 penalty (or more, depending on damage).</li>
+    <li>The renter must return the fuel level and cleanliness as received. A cleaning fee of ₱<input type="text" class="border-b border-gray-500 w-16 ml-2" /> will apply if not followed.</li>
+    <li>The owner is not responsible for the renter’s lost or damaged personal belongings.</li>
+    <li>Any violation of these terms gives the owner the right to repossess the vehicle without refund and impose a ₱10,000 fee.</li>
+    <li>Excess per hour: ₱<input type="text" class="border-b border-gray-500 w-16 ml-2" />, with over 6 hours considered one full rental day.</li>
+    <li>Damage charges: ₱<input type="text" class="border-b border-gray-500 w-16 ml-2" /> per panel. The renter also covers all repair costs and days out of service.</li>
+    <li>No smoking allowed. A violation results in a ₱5,000 penalty.</li>
+    <li>Failure to refuel will incur a penalty based on estimated consumption.</li>
+  </ol>
+
+  <p class="mb-6 font-semibold">THIS IS TO CERTIFY THAT I UNDERSTAND THE TERMS AND CONDITIONS STATED ABOVE</p>
+
+  <div class="flex justify-between mt-12">
+    <div class="text-center">
+      <div class="border-t border-gray-500 w-64 mx-auto mb-1"></div>
+      <p>OWNER / SIGNATURE OVER PRINTED NAME</p>
+    </div>
+    <div class="text-center">
+      <div class="border-t border-gray-500 w-64 mx-auto mb-1"></div>
+      <p>RENTER / SIGNATURE OVER PRINTED NAME</p>
+    </div>
+  </div>
+
+</body>
+</html>
